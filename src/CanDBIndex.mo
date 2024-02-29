@@ -3,21 +3,21 @@ import Cycles "mo:base/ExperimentalCycles";
 import Debug "mo:base/Debug";
 import Text "mo:base/Text";
 import TrieSet "mo:base/TrieSet";
-import CA "mo:candb/CanisterActions";
-import Utils "mo:candb/Utils";
-import CanisterMap "mo:candb/CanisterMap";
+import CA "mo:CanDB/CanisterActions";
+import Utils "mo:CanDB/Utils";
+import CanisterMap "mo:CanDB/CanisterMap";
 import Buffer "mo:stable-buffer/StableBuffer";
 import CanDBPartition "CanDBPartition";
-import Admin "mo:candb/CanDBAdmin";
+import Admin "mo:CanDB/CanDBAdmin";
 import Principal "mo:base/Principal";
 import Hash "mo:base/Hash";
 import Array "mo:base/Array";
 import Int "mo:base/Int";
 import Iter "mo:base/Iter";
 import Time "mo:base/Time";
-import CanDB "mo:candb/CanDB";
+import CanDB "mo:CanDB/CanDB";
 import Multi "mo:CanDBMulti/Multi";
-import Entity "mo:candb/Entity";
+import Entity "mo:CanDB/Entity";
 // import Canister "mo:matchers/Canister";
 
 shared({caller = initialOwner}) actor class CanDBIndex() = this {
@@ -57,7 +57,7 @@ shared({caller = initialOwner}) actor class CanDBIndex() = this {
   ///
   /// Get all canisters for an specific PK
   ///
-  /// This method is called often by the candb-client query & update methods. 
+  /// This method is called often by the CanDB-client query & update methods. 
   public shared query({caller}) func getCanistersByPK(pk: Text): async [Text] {
     getCanisterIdsIfExists(pk);
   };

@@ -1,7 +1,7 @@
 import Array "mo:base/Array";
-import CA "mo:candb/CanisterActions";
-import Entity "mo:candb/Entity";
-import CanDB "mo:candb/CanDB";
+import CA "mo:CanDB/CanisterActions";
+import Entity "mo:CanDB/Entity";
+import CanDB "mo:CanDB/CanDB";
 import Multi "mo:CanDBMulti/Multi";
 import RBT "mo:stable-rbtree/StableRBTree";
 import Principal "mo:base/Principal";

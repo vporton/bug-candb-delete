@@ -1,7 +1,7 @@
 [dependencies]
 base = "0.10.4"
 CanDBMulti = "https://github.com/vporton/CanDBMulti#v0.10.0@86d00711216349ba4879370d6313d44a26d16f61"
-candb = "https://github.com/vporton/CanDB#no-blob-dev@5582b6d383a9587acb2338baed025406e1d6a229"
+CanDB = "https://github.com/vporton/CanDB#no-blob-dev@5582b6d383a9587acb2338baed025406e1d6a229"
 stable-buffer = "https://github.com/canscale/StableBuffer#v0.2.0"
 stablebuffer = "https://github.com/canscale/StableBuffer#v0.2.0"
 StableBuffer = "https://github.com/canscale/StableBuffer#v0.2.0"
