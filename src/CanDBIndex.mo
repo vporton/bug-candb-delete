@@ -8,7 +8,6 @@ import Utils "mo:candb/Utils";
 import CanisterMap "mo:candb/CanisterMap";
 import Buffer "mo:stable-buffer/StableBuffer";
 import CanDBPartition "CanDBPartition";
-import CanDBPartition2 "../storage/CanDBPartition";
 import Admin "mo:candb/CanDBAdmin";
 import Principal "mo:base/Principal";
 import Hash "mo:base/Hash";
@@ -19,9 +18,7 @@ import Time "mo:base/Time";
 import CanDB "mo:candb/CanDB";
 import Multi "mo:CanDBMulti/Multi";
 import Entity "mo:candb/Entity";
-import Canister "mo:matchers/Canister";
-import lib "../backend/lib";
-import Conf "../../config";
+// import Canister "mo:matchers/Canister";
 
 shared({caller = initialOwner}) actor class CanDBIndex() = this {
   stable var owners: [Principal] = [initialOwner];
@@ -40,15 +37,7 @@ shared({caller = initialOwner}) actor class CanDBIndex() = this {
     initialized := true;
   };
 
-  func checkCaller(caller: Principal) {
-    if (Array.find(owners, func(e: Principal): Bool { e == caller; }) == null) {
-      Debug.trap("CanDBIndex: not allowed");
-    }
-  };
-
   public shared({caller = caller}) func setOwners(_owners: [Principal]): async () {
-    checkCaller(caller);
-
     owners := _owners;
   };
 
@@ -89,8 +78,6 @@ shared({caller = initialOwner}) actor class CanDBIndex() = this {
   /// If the developer does not spin up an additional User canister in the same partition within this method, auto-scaling will NOT work
   /// Upgrade user canisters in a PK range, i.e. rolling upgrades (limit is fixed at upgrading the canisters of 5 PKs per call)
   public shared({caller}) func upgradeAllPartitionCanisters(wasmModule: Blob): async Admin.UpgradePKRangeResult {
-    checkCaller(caller);
-
     await Admin.upgradeCanistersInPKRange({
       canisterMap = pkToCanisterMap;
       lowerPK = "";
@@ -106,8 +93,6 @@ shared({caller = initialOwner}) actor class CanDBIndex() = this {
   };
 
   public shared({caller}) func autoScaleCanister(pk: Text): async Text {
-    checkCaller(caller);
-
     if (Utils.callingCanisterOwnsPK(caller, pkToCanisterMap, pk)) {
       await* createStorageCanister(pk, ownersOrSelf());
     } else {
@@ -223,8 +208,6 @@ shared({caller = initialOwner}) actor class CanDBIndex() = this {
       pk: Text,
       options: { sk: Entity.SK; key: Entity.AttributeKey; value: Entity.AttributeValue }
   ) : async Principal {
-    checkCaller(caller);
-
     await* Multi.putAttributeNoDuplicates(pkToCanisterMap, pk, options);
   };
 
@@ -235,59 +218,55 @@ shared({caller = initialOwner}) actor class CanDBIndex() = this {
     await* Multi.putAttributeWithPossibleDuplicate(pkToCanisterMap, pk, options);
   };
 
-  func setVotingDataImpl(user: Principal, partitionId: ?Principal, voting: lib.VotingScore): async* () {
-    let sk = "u/" # Principal.toText(user); // TODO: Should use binary encoding.
-    // TODO: Add Hint to CanDBMulti
-    ignore await* Multi.putAttributeNoDuplicates(pkToCanisterMap, "user", {
-      sk;
-      key = "v";
-      value = lib.serializeVoting(voting);
-    });
-  };
+  // func setVotingDataImpl(user: Principal, partitionId: ?Principal, voting: lib.VotingScore): async* () {
+  //   let sk = "u/" # Principal.toText(user); // TODO: Should use binary encoding.
+  //   // TODO: Add Hint to CanDBMulti
+  //   ignore await* Multi.putAttributeNoDuplicates(pkToCanisterMap, "user", {
+  //     sk;
+  //     key = "v";
+  //     value = lib.serializeVoting(voting);
+  //   });
+  // };
 
-  public shared({caller}) func setVotingData(user: Principal, partitionId: ?Principal, voting: lib.VotingScore): async () {
-    checkCaller(caller); // necessary
-    await* setVotingDataImpl(user, partitionId, voting);
-  };
+  // public shared({caller}) func setVotingData(user: Principal, partitionId: ?Principal, voting: lib.VotingScore): async () {
+  //   await* setVotingDataImpl(user, partitionId, voting);
+  // };
 
-  func getVotingData(caller: Principal, partitionId: ?Principal): async* ?lib.VotingScore {
-    let sk = "u/" # Principal.toText(caller); // TODO: Should use binary encoding.
-    // TODO: Add Hint to CanDBMulti
-    let res = await* Multi.getAttributeByHint(pkToCanisterMap, "user", partitionId, {sk; key = "v"});
-    do ? { lib.deserializeVoting(res!.1!) };
-  };
+  // func getVotingData(caller: Principal, partitionId: ?Principal): async* ?lib.VotingScore {
+  //   let sk = "u/" # Principal.toText(caller); // TODO: Should use binary encoding.
+  //   // TODO: Add Hint to CanDBMulti
+  //   let res = await* Multi.getAttributeByHint(pkToCanisterMap, "user", partitionId, {sk; key = "v"});
+  //   do ? { lib.deserializeVoting(res!.1!) };
+  // };
 
-  func sybilScoreImpl(user: Principal): async* (Bool, Float) {
-    // checkCaller(user); // TODO: enable?
+  // func sybilScoreImpl(user: Principal): async* (Bool, Float) {
+  //   let voting = await* getVotingData(user, null); // TODO: hint `partitionId`, not null
+  //   switch (voting) {
+  //     case (?voting) {
+  //       Debug.print("VOTING: " # debug_show(voting));
+  //       if (voting.lastChecked + 150 * 24 * 3600 * 1_000_000_000 >= Time.now() and // TODO: Make configurable.
+  //         voting.points >= Conf.minimumScore)
+  //       {
+  //         (true, voting.points);
+  //       } else {
+  //         (false, 0.0);
+  //       };
+  //     };
+  //     case null { (false, 0.0) };
+  //   };
+  // };
 
-    let voting = await* getVotingData(user, null); // TODO: hint `partitionId`, not null
-    switch (voting) {
-      case (?voting) {
-        Debug.print("VOTING: " # debug_show(voting));
-        if (voting.lastChecked + 150 * 24 * 3600 * 1_000_000_000 >= Time.now() and // TODO: Make configurable.
-          voting.points >= Conf.minimumScore)
-        {
-          (true, voting.points);
-        } else {
-          (false, 0.0);
-        };
-      };
-      case null { (false, 0.0) };
-    };
-  };
+  // public shared({caller}) func sybilScore(): async (Bool, Float) {
+  //   await* sybilScoreImpl(caller);
+  // };
 
-  public shared({caller}) func sybilScore(): async (Bool, Float) {
-    await* sybilScoreImpl(caller);
-  };
-
-  public shared func checkSybil(user: Principal): async () {
-    // checkCaller(user); // TODO: enable?
-    if (Conf.skipSybil) {
-      return;
-    };
-    let (allowed, score) = await* sybilScoreImpl(user);
-    if (not allowed) {
-      Debug.trap("Sybil check failed");
-    };
-  };
+  // public shared func checkSybil(user: Principal): async () {
+  //   if (Conf.skipSybil) {
+  //     return;
+  //   };
+  //   let (allowed, score) = await* sybilScoreImpl(user);
+  //   if (not allowed) {
+  //     Debug.trap("Sybil check failed");
+  //   };
+  // };
 }
