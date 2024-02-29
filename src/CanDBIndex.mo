@@ -1,22 +1,11 @@
-import RBT "mo:stable-rbtree/StableRBTree";
 import Cycles "mo:base/ExperimentalCycles";
 import Debug "mo:base/Debug";
-import Text "mo:base/Text";
-import TrieSet "mo:base/TrieSet";
 import CA "mo:CanDB/CanisterActions";
 import Utils "mo:CanDB/Utils";
 import CanisterMap "mo:CanDB/CanisterMap";
 import Buffer "mo:stable-buffer/StableBuffer";
 import CanDBPartition "CanDBPartition";
-import Admin "mo:CanDB/CanDBAdmin";
 import Principal "mo:base/Principal";
-import Hash "mo:base/Hash";
-import Array "mo:base/Array";
-import Int "mo:base/Int";
-import Iter "mo:base/Iter";
-import Time "mo:base/Time";
-import CanDB "mo:CanDB/CanDB";
-import Entity "mo:CanDB/Entity";
 
 shared({caller = initialOwner}) actor class CanDBIndex() = this {
   stable var owners: [Principal] = [initialOwner];

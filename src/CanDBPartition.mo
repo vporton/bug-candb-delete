@@ -1,16 +1,8 @@
-import Array "mo:base/Array";
-import CA "mo:CanDB/CanisterActions";
 import Entity "mo:CanDB/Entity";
 import CanDB "mo:CanDB/CanDB";
-import E "mo:CanDB/Entity";
 import RBT "mo:stable-rbtree/StableRBTree";
-import Principal "mo:base/Principal";
-import Bool "mo:base/Bool";
-import Debug "mo:base/Debug";
 import Text "mo:base/Text";
-import Buffer "mo:base/Buffer";
-import Iter "mo:base/Iter";
-import Nat "mo:base/Nat";
+import Debug "mo:base/Debug";
 
 shared actor class CanDBPartition(options: {
   partitionKey: Text;
@@ -36,10 +28,10 @@ shared actor class CanDBPartition(options: {
     CanDB.delete(db, options);
   };
 
-  func replaceAttribute(db: CanDB.DB, options: { sk: E.SK; key: E.AttributeKey; value: E.AttributeValue })
-      : async* ?E.Entity
+  func replaceAttribute(db: CanDB.DB, options: { sk: Entity.SK; key: Entity.AttributeKey; value: Entity.AttributeValue })
+      : async* ?Entity.Entity
   {
-      CanDB.update(db, { sk = options.sk; updateAttributeMapFunction = func(old: ?E.AttributeMap): E.AttributeMap {
+      CanDB.update(db, { sk = options.sk; updateAttributeMapFunction = func(old: ?Entity.AttributeMap): Entity.AttributeMap {
           let map = switch (old) {
               case (?old) { old };
               case null { RBT.init() };
