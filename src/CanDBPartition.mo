@@ -2,7 +2,7 @@ import Array "mo:base/Array";
 import CA "mo:CanDB/CanisterActions";
 import Entity "mo:CanDB/Entity";
 import CanDB "mo:CanDB/CanDB";
-import Multi "mo:CanDBMulti/Multi";
+import E "mo:CanDB/Entity";
 import RBT "mo:stable-rbtree/StableRBTree";
 import Principal "mo:base/Principal";
 import Bool "mo:base/Bool";
@@ -91,20 +91,32 @@ shared actor class CanDBPartition(options: {
 
   // CanDBMulti //
 
+  func replaceAttribute(db: CanDB.DB, options: { sk: E.SK; key: E.AttributeKey; value: E.AttributeValue })
+      : async* ?E.Entity
+  {
+      CanDB.update(db, { sk = options.sk; updateAttributeMapFunction = func(old: ?E.AttributeMap): E.AttributeMap {
+          let map = switch (old) {
+              case (?old) { old };
+              case null { RBT.init() };
+          };
+          RBT.put(map, Text.compare, options.key, options.value);
+      }});
+  };
+
   public shared({caller}) func putAttribute(options: { sk: Entity.SK; key: Entity.AttributeKey; value: Entity.AttributeValue }): async () {
     Debug.print("TRACE: putAttribute(" # debug_show(options) # ")");
-    ignore await* Multi.replaceAttribute(db, options);
+    ignore await* replaceAttribute(db, options);
   };
 
-  public shared({caller}) func putExisting(options: CanDB.PutOptions): async Bool {
-    Debug.print("TRACE: putExisting(" # debug_show(options) # ")");
-    await* Multi.putExisting(db, options);
-  };
+  // public shared({caller}) func putExisting(options: CanDB.PutOptions): async Bool {
+  //   Debug.print("TRACE: putExisting(" # debug_show(options) # ")");
+  //   await* Multi.putExisting(db, options);
+  // };
 
-  public shared({caller}) func putExistingAttribute(options: { sk: Entity.SK; key: Entity.AttributeKey; value: Entity.AttributeValue })
-    : async Bool
-  {
-    Debug.print("TRACE: putExistingAttribute(" # debug_show(options) # ")");
-    await* Multi.putExistingAttribute(db, options);
-  };
+  // public shared({caller}) func putExistingAttribute(options: { sk: Entity.SK; key: Entity.AttributeKey; value: Entity.AttributeValue })
+  //   : async Bool
+  // {
+  //   Debug.print("TRACE: putExistingAttribute(" # debug_show(options) # ")");
+  //   await* Multi.putExistingAttribute(db, options);
+  // };
 }

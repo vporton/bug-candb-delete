@@ -16,7 +16,6 @@ import Int "mo:base/Int";
 import Iter "mo:base/Iter";
 import Time "mo:base/Time";
 import CanDB "mo:CanDB/CanDB";
-import Multi "mo:CanDBMulti/Multi";
 import Entity "mo:CanDB/Entity";
 // import Canister "mo:matchers/Canister";
 
@@ -197,26 +196,26 @@ shared({caller = initialOwner}) actor class CanDBIndex() = this {
 
   // CanDBMulti //
 
-  public shared({caller}) func getFirstAttribute(
-    pk: Text,
-    options: { sk: Entity.SK; key: Entity.AttributeKey }
-  ) : async ?(Principal, ?Entity.AttributeValue) {
-    await* Multi.getFirstAttribute(pkToCanisterMap, pk, options);
-  };
+  // public shared({caller}) func getFirstAttribute(
+  //   pk: Text,
+  //   options: { sk: Entity.SK; key: Entity.AttributeKey }
+  // ) : async ?(Principal, ?Entity.AttributeValue) {
+  //   await* Multi.getFirstAttribute(pkToCanisterMap, pk, options);
+  // };
 
-  public shared({caller}) func putAttributeNoDuplicates(
-      pk: Text,
-      options: { sk: Entity.SK; key: Entity.AttributeKey; value: Entity.AttributeValue }
-  ) : async Principal {
-    await* Multi.putAttributeNoDuplicates(pkToCanisterMap, pk, options);
-  };
+  // public shared({caller}) func putAttributeNoDuplicates(
+  //     pk: Text,
+  //     options: { sk: Entity.SK; key: Entity.AttributeKey; value: Entity.AttributeValue }
+  // ) : async Principal {
+  //   await* Multi.putAttributeNoDuplicates(pkToCanisterMap, pk, options);
+  // };
 
-  public shared({caller}) func putAttributeWithPossibleDuplicate(
-    pk: Text,
-    options: { sk: Entity.SK; key: Entity.AttributeKey; value: Entity.AttributeValue }
-  ) : async Principal {
-    await* Multi.putAttributeWithPossibleDuplicate(pkToCanisterMap, pk, options);
-  };
+  // public shared({caller}) func putAttributeWithPossibleDuplicate(
+  //   pk: Text,
+  //   options: { sk: Entity.SK; key: Entity.AttributeKey; value: Entity.AttributeValue }
+  // ) : async Principal {
+  //   await* Multi.putAttributeWithPossibleDuplicate(pkToCanisterMap, pk, options);
+  // };
 
   // func setVotingDataImpl(user: Principal, partitionId: ?Principal, voting: lib.VotingScore): async* () {
   //   let sk = "u/" # Principal.toText(user); // TODO: Should use binary encoding.
