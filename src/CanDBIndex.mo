@@ -27,7 +27,7 @@ shared({caller = initialOwner}) actor class CanDBIndex() = this {
 
   public shared func init(_owners: [Principal]): async () {
     if (initialized) {
-      Debug.trap("already initialized");
+      return;
     };
 
     owners := _owners;
