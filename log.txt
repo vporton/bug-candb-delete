@@ -1,0 +1,29 @@
+2024-02-28 22:28:29.439103381 UTC: [Canister b77ix-eeaaa-aaaaa-qaada-cai] attempted to upgrade 0 canisters
+2024-02-28 22:28:29.439103381 UTC: [Canister b77ix-eeaaa-aaaaa-qaada-cai] canister ids=[], upgraded successfully 0 canisters
+2024-02-28 22:28:29.439103381 UTC: [Canister b77ix-eeaaa-aaaaa-qaada-cai] canister ids=[], failed to upgrade 0 canisters
+2024-02-28 22:28:42.827200942 UTC: [Canister b77ix-eeaaa-aaaaa-qaada-cai] creating new storage canister with pk=main
+2024-02-28 22:28:46.708984737 UTC: [Canister b77ix-eeaaa-aaaaa-qaada-cai] new storage canisterId=ajuq4-ruaaa-aaaaa-qaaga-cai
+2024-02-28 22:28:46.708984737 UTC: [Canister b77ix-eeaaa-aaaaa-qaada-cai] creating new storage canister with pk=user
+2024-02-28 22:28:50.534548750 UTC: [Canister b77ix-eeaaa-aaaaa-qaada-cai] new storage canisterId=aovwi-4maaa-aaaaa-qaagq-cai
+2024-02-28 22:28:58.201902575 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "i"; sk = "i/0"; value = #tuple([#int(0), #bool(true), #int(+3), #text("ruuoz-anyad-jumcs-huq7s-3eh7h-ja6j2-cmp2n-elv23-tghui-mve6f-xqe"), #float(0.000000), #text("en"), #text("The homepage"), #text("")])})
+2024-02-28 22:41:12.833724425 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "i"; sk = "i/1"; value = #tuple([#int(0), #bool(false), #int(+3), #text("slnzg-gc3pt-atp5r-qaa7q-3az2g-fcgb7-qf27s-khvrd-oo57m-23unl-dae"), #float(0.000000), #text("en"), #text("qqq"), #text("")])})
+2024-02-28 22:41:15.379437986 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "st"; sk = "i/0"; value = #tuple([#int(-1), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(0), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+1), #int(-1)])})
+2024-02-28 22:41:15.379437986 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "srt"; sk = "i/1"; value = #tuple([#int(-1), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+2), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+3), #int(-1)])})
+2024-02-28 22:41:15.379437986 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "sv"; sk = "i/0"; value = #tuple([#int(-1), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+4), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+5), #int(-1)])})
+2024-02-28 22:41:15.379437986 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "srv"; sk = "i/1"; value = #tuple([#int(-1), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+6), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+7), #int(-1)])})
+2024-02-28 22:41:26.157150049 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "i"; sk = "i/2"; value = #tuple([#int(0), #bool(false), #int(+3), #text("slnzg-gc3pt-atp5r-qaa7q-3az2g-fcgb7-qf27s-khvrd-oo57m-23unl-dae"), #float(0.000000), #text("en"), #text("eee"), #text("")])})
+2024-02-28 22:41:28.055416022 UTC: [Canister bd3sg-teaaa-aaaaa-qaaba-cai] t=0000000000000000#aefbdb1098288d5d43d21c8de390f928; n=0
+2024-02-28 22:41:28.055416022 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "st"; sk = "i/0"; value = #tuple([#int(-1), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(0), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+1), #int(-1)])})
+2024-02-28 22:41:28.055416022 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "srt"; sk = "i/2"; value = #tuple([#int(-1), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+8), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+9), #int(-1)])})
+2024-02-28 22:41:28.055416022 UTC: [Canister bd3sg-teaaa-aaaaa-qaaba-cai] t=0000000000000000#b9b74f8cbc9ca55910e7cc3733e8beaf; n=0
+2024-02-28 22:41:28.055416022 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "sv"; sk = "i/0"; value = #tuple([#int(-1), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+4), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+5), #int(-1)])})
+2024-02-28 22:41:28.055416022 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "srv"; sk = "i/2"; value = #tuple([#int(-1), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+10), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+11), #int(-1)])})
+2024-02-28 22:41:39.438567783 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "i"; sk = "i/3"; value = #tuple([#int(0), #bool(false), #int(+3), #text("slnzg-gc3pt-atp5r-qaa7q-3az2g-fcgb7-qf27s-khvrd-oo57m-23unl-dae"), #float(0.000000), #text("en"), #text("zzz"), #text("")])})
+2024-02-28 22:41:41.988087659 UTC: [Canister bd3sg-teaaa-aaaaa-qaaba-cai] t=-ffffffffffffffff#e3f0e67f8935aa529a22a5be6cda420c; n=-1
+2024-02-28 22:41:41.988087659 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "st"; sk = "i/0"; value = #tuple([#int(-1), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(0), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+1), #int(-1)])})
+2024-02-28 22:41:41.988087659 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "srt"; sk = "i/3"; value = #tuple([#int(-1), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+12), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+13), #int(-1)])})
+2024-02-28 22:41:41.988087659 UTC: [Canister bd3sg-teaaa-aaaaa-qaaba-cai] t=-ffffffffffffffff#7941e574004e8e1bae0db7a61e66164a; n=-1
+2024-02-28 22:41:41.988087659 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "sv"; sk = "i/0"; value = #tuple([#int(-1), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+4), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+5), #int(-1)])})
+2024-02-28 22:41:41.988087659 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: putAttribute({key = "srv"; sk = "i/3"; value = #tuple([#int(-1), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+14), #text("ahw5u-keaaa-aaaaa-qaaha-cai"), #int(+15), #int(-1)])})
+2024-02-28 22:42:02.299400516 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] DEBUG: 2@ajuq4-ruaaa-aaaaa-qaaga-cai
+2024-02-28 22:42:02.299400516 UTC: [Canister ajuq4-ruaaa-aaaaa-qaaga-cai] TRACE: delete({sk = "i/2"})
