@@ -24,23 +24,16 @@ shared({caller = initialOwner}) actor class CanDBIndex() = this {
 
   stable var initialized: Bool = false;
 
-  public shared func init(_owners: [Principal]): async () {
+  public shared({caller}) func init(_owners: [Principal]): async () {
     if (initialized) {
       return;
     };
 
     owners := _owners;
-    ignore await* createStorageCanister("main", ownersOrSelf());
-    ignore await* createStorageCanister("user", ownersOrSelf()); // user data
+    ignore await* createStorageCanister("main", [caller]);
 
     initialized := true;
   };
-
-  public shared({caller = caller}) func setOwners(_owners: [Principal]): async () {
-    owners := _owners;
-  };
-
-  public query func getOwners(): async [Principal] { owners };
 
   func ownersOrSelf(): [Principal] {
     let buf = Buffer.fromArray<Principal>(owners);
