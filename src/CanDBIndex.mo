@@ -64,7 +64,6 @@ shared({caller = initialOwner}) actor class CanDBIndex() = this {
         autoScalingHook = autoScaleCanister;
         sizeLimit = maxSize;
       };
-      owners = ?controllers;
     });
     let newStorageCanisterPrincipal = Principal.fromActor(newStorageCanister);
     await CA.updateCanisterSettings({

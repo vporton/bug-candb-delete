@@ -7,13 +7,7 @@ import Debug "mo:base/Debug";
 shared actor class CanDBPartition(options: {
   partitionKey: Text;
   scalingOptions: CanDB.ScalingOptions;
-  owners: ?[Principal];
 }) = this {
-  stable var owners = switch (options.owners) {
-    case (?p) { p };
-    case _ { [] };
-  };
-
   stable let db = CanDB.init({
     pk = options.partitionKey;
     scalingOptions = options.scalingOptions;
