@@ -17,7 +17,6 @@ import Iter "mo:base/Iter";
 import Time "mo:base/Time";
 import CanDB "mo:CanDB/CanDB";
 import Entity "mo:CanDB/Entity";
-// import Canister "mo:matchers/Canister";
 
 shared({caller = initialOwner}) actor class CanDBIndex() = this {
   stable var owners: [Principal] = [initialOwner];
@@ -45,19 +44,10 @@ shared({caller = initialOwner}) actor class CanDBIndex() = this {
 
   stable var pkToCanisterMap = CanisterMap.init();
 
-  /// @required API (Do not delete or change)
-  ///
-  /// Get all canisters for an specific PK
-  ///
-  /// This method is called often by the CanDB-client query & update methods. 
   public shared query({caller}) func getCanistersByPK(pk: Text): async [Text] {
     getCanisterIdsIfExists(pk);
   };
-  
-  /// @required function (Do not delete or change)
-  ///
-  /// Helper method acting as an interface for returning an empty array if no canisters
-  /// exist for the given PK
+
   func getCanisterIdsIfExists(pk: Text): [Text] {
     switch(CanisterMap.get(pkToCanisterMap, pk)) {
       case null { [] };
