@@ -65,25 +65,6 @@ shared({caller = initialOwner}) actor class CanDBIndex() = this {
     }
   };
 
-  /// This hook is called by CanDB for AutoScaling the User Service Actor.
-  ///
-  /// If the developer does not spin up an additional User canister in the same partition within this method, auto-scaling will NOT work
-  /// Upgrade user canisters in a PK range, i.e. rolling upgrades (limit is fixed at upgrading the canisters of 5 PKs per call)
-  public shared({caller}) func upgradeAllPartitionCanisters(wasmModule: Blob): async Admin.UpgradePKRangeResult {
-    await Admin.upgradeCanistersInPKRange({
-      canisterMap = pkToCanisterMap;
-      lowerPK = "";
-      upperPK = "\u{FFFF}";
-      limit = 5;
-      wasmModule = wasmModule;
-      scalingOptions = {
-        autoScalingHook = autoScaleCanister;
-        sizeLimit = maxSize;
-      };
-      owners = ?ownersOrSelf();
-    });
-  };
-
   public shared({caller}) func autoScaleCanister(pk: Text): async Text {
     if (Utils.callingCanisterOwnsPK(caller, pkToCanisterMap, pk)) {
       await* createStorageCanister(pk, ownersOrSelf());
