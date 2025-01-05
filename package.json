@@ -17,7 +17,7 @@
     "generate": "dfx generate prog_backend"
   },
   "dependencies": {
-    "@dfinity/agent": "^1.0.1",
+    "@dfinity/agent": "^1.4.0",
     "@dfinity/candid": "^1.0.1",
     "@dfinity/principal": "^1.0.1"
   },
