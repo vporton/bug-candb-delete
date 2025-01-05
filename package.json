@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@dfinity/agent": "^1.0.1",
-    "@dfinity/candid": "^1.0.1",
+    "@dfinity/candid": "^1.4.0",
     "@dfinity/principal": "^1.0.1"
   },
   "devDependencies": {
